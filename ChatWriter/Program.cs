@@ -13,8 +13,8 @@ public class ChatWriter
         reader.Close();
         sessionFileStream = new FileStream(p, FileMode.Open, FileAccess.Write, FileShare.ReadWrite);
         StreamWriter writer = new StreamWriter(sessionFileStream);
-        writer.WriteLine(name + ">" +message);
-        writer.WriteLine(i+1);
+        writer.WriteLine(name + ">" + message);
+        writer.WriteLine(i + 1);
         writer.Close();
     }
 
@@ -44,7 +44,7 @@ public class ChatWriter
         string sessionFilePath = mainFolderPath + sessionId;
         Console.WriteLine("Enter your username:");
         string username = Console.ReadLine();
-        username += "(#" +rn.Next()%1000+1+")";
+        username += "(#" + rn.Next() % 1000 + 1 + ")";
         if (!File.Exists(sessionFilePath))
         {
             CreateSession(sessionFilePath);
@@ -54,6 +54,7 @@ public class ChatWriter
 
         while (true)
         {
+            Console.ForegroundColor = ConsoleColor.White;
             string m = Console.ReadLine() + "";
             if (m.Length < 1)
             {
@@ -65,7 +66,20 @@ public class ChatWriter
             }
             else
             {
+                Console.SetCursorPosition(0, 1);
+                Console.WriteLine(m.Length / Console.BufferWidth + 1);
+                Console.SetCursorPosition(0, 6);
+                for (int i = 0; i < m.Length / Console.BufferWidth + 1; i++)
+                {
+                    Console.SetCursorPosition(0, 6 + i);
+                    Console.Write(new String(' ', Console.BufferWidth) + "\n");
+                }
+
+                Console.SetCursorPosition(50, 2);
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Your message was not sent because it does not satisfy our filters.");
+                Console.SetCursorPosition(0, 6);
+
             }
         }
     }
