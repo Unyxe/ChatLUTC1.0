@@ -1,7 +1,6 @@
-﻿using System.IO;
-using System;
+﻿namespace ChatWindow;
 
-public class ChatWindow
+public static class ChatWindow
 {
     static void CreateSession(string p)
     {
@@ -14,8 +13,17 @@ public class ChatWindow
     public static void Main(string[] args)
     {
         string mainFolderPath = @"C:\Chat\Sessions\";
+        if (Directory.Exists(@"C:\Chat\"))
+        {
+            Directory.CreateDirectory(@"C:\Chat\");
+            Directory.CreateDirectory(@"C:\Chat\Sessions");
+        }
+        if (Directory.Exists(@"C:\Chat\Sessions"))
+        {
+            Directory.CreateDirectory(@"C:\Chat\Sessions");
+        }
         Console.WriteLine("Enter the session id:");
-        string sessionId = Console.ReadLine();
+        string sessionId = Console.ReadLine()+"";
         string sessionFilePath = mainFolderPath + sessionId;
         if (!File.Exists(sessionFilePath))
         {
@@ -26,25 +34,25 @@ public class ChatWindow
         FileStream sessionFileStream = new FileStream(sessionFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
         StreamReader reader = new StreamReader(sessionFileStream);
         reader.ReadLine();
-        int i = Int32.Parse(reader.ReadLine());
-        int i_ = i;
+        int i = Int32.Parse(reader.ReadLine()+"");
+        var iBuff = i;
         reader.Close();
         while (true)
         {
             sessionFileStream = new FileStream(sessionFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             reader = new StreamReader(sessionFileStream);
             reader.ReadLine();
-            i = Int32.Parse(reader.ReadLine());
+            i = Int32.Parse(reader.ReadLine()+"");
             reader.Close();
-            if (i != i_)
+            if (i != iBuff)
             {
-                i_ = i;
+                iBuff = i;
                 sessionFileStream = new FileStream(sessionFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
                 reader = new StreamReader(sessionFileStream);
                 Console.WriteLine(reader.ReadLine());
-                i = Int32.Parse(reader.ReadLine());
                 reader.Close();
             }
         }
+        // ReSharper disable once FunctionNeverReturns
     }
 }
