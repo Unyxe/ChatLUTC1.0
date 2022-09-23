@@ -1,0 +1,15 @@
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\obj\Debug\net6.0\ChatWindow.csproj.AssemblyReference.cache
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\obj\Debug\net6.0\ChatWindow.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\obj\Debug\net6.0\ChatWindow.AssemblyInfoInputs.cache
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\obj\Debug\net6.0\ChatWindow.AssemblyInfo.cs
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\obj\Debug\net6.0\ChatWindow.csproj.CoreCompileInputs.cache
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\bin\Debug\net6.0\ChatWindow.exe
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\bin\Debug\net6.0\ChatWindow.deps.json
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\bin\Debug\net6.0\ChatWindow.runtimeconfig.json
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\bin\Debug\net6.0\ChatWindow.dll
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\bin\Debug\net6.0\ChatWindow.pdb
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\obj\Debug\net6.0\ChatWindow.dll
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\obj\Debug\net6.0\refint\ChatWindow.dll
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\obj\Debug\net6.0\ChatWindow.pdb
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\obj\Debug\net6.0\ChatWindow.genruntimeconfig.cache
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\obj\Debug\net6.0\ref\ChatWindow.dll

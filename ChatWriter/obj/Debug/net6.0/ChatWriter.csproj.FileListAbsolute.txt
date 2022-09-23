@@ -1,0 +1,15 @@
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWriter\bin\Debug\net6.0\ChatWriter.exe
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWriter\bin\Debug\net6.0\ChatWriter.deps.json
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWriter\bin\Debug\net6.0\ChatWriter.runtimeconfig.json
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWriter\bin\Debug\net6.0\ChatWriter.dll
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWriter\bin\Debug\net6.0\ChatWriter.pdb
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWriter\obj\Debug\net6.0\ChatWriter.csproj.AssemblyReference.cache
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWriter\obj\Debug\net6.0\ChatWriter.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWriter\obj\Debug\net6.0\ChatWriter.AssemblyInfoInputs.cache
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWriter\obj\Debug\net6.0\ChatWriter.AssemblyInfo.cs
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWriter\obj\Debug\net6.0\ChatWriter.csproj.CoreCompileInputs.cache
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWriter\obj\Debug\net6.0\ChatWriter.dll
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWriter\obj\Debug\net6.0\refint\ChatWriter.dll
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWriter\obj\Debug\net6.0\ChatWriter.pdb
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWriter\obj\Debug\net6.0\ChatWriter.genruntimeconfig.cache
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWriter\obj\Debug\net6.0\ref\ChatWriter.dll
