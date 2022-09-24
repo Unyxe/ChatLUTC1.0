@@ -2,6 +2,9 @@
 
 public static class ChatWindow
 {
+    public static List<string> MutedUsers = new List<string>();
+    public static string MainFolderPath = @"C:\Chat\Sessions\";
+    public static string RootFolderPath = @"C:\Chat\";
     static void CreateSession(string p)
     {
         FileStream file = File.Create(p);
@@ -12,25 +15,26 @@ public static class ChatWindow
     }
     public static void Main(string[] args)
     {
-        string mainFolderPath = @"C:\Chat\Sessions\";
-        if (Directory.Exists(@"C:\Chat\"))
+        if (!Directory.Exists(RootFolderPath))
         {
-            Directory.CreateDirectory(@"C:\Chat\");
-            Directory.CreateDirectory(@"C:\Chat\Sessions");
+            DirectoryInfo di = Directory.CreateDirectory(RootFolderPath);
+            di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
+            Directory.CreateDirectory(MainFolderPath);
         }
-        if (Directory.Exists(@"C:\Chat\Sessions"))
+        if (!Directory.Exists(MainFolderPath))
         {
-            Directory.CreateDirectory(@"C:\Chat\Sessions");
+            Directory.CreateDirectory(MainFolderPath);
         }
         Console.WriteLine("Enter the session id:");
         string sessionId = Console.ReadLine()+"";
-        string sessionFilePath = mainFolderPath + sessionId;
+        string sessionFilePath = MainFolderPath + sessionId;
         if (!File.Exists(sessionFilePath))
         {
             CreateSession(sessionFilePath);
             Console.WriteLine("This session id didn't exist so new one was created. Your unique session id is: " + sessionId);
         }
         Console.WriteLine("Connected!\n");
+        
         FileStream sessionFileStream = new FileStream(sessionFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
         StreamReader reader = new StreamReader(sessionFileStream);
         reader.ReadLine();

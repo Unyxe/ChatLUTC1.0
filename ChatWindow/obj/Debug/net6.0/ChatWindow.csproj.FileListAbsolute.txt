@@ -13,3 +13,10 @@ C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\obj\Debug\net6.0\refint\Ch
 C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\obj\Debug\net6.0\ChatWindow.pdb
 C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\obj\Debug\net6.0\ChatWindow.genruntimeconfig.cache
 C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\obj\Debug\net6.0\ref\ChatWindow.dll
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\bin\Debug\net6.0\Google.Apis.dll
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\bin\Debug\net6.0\Google.Apis.Auth.PlatformServices.dll
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\bin\Debug\net6.0\Google.Apis.Auth.dll
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\bin\Debug\net6.0\Google.Apis.Core.dll
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\bin\Debug\net6.0\Google.Apis.Drive.v3.dll
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\lucky\RiderProjects\ChatMainFrame\ChatWindow\obj\Debug\net6.0\ChatWindow.csproj.CopyComplete
