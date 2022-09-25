@@ -4,8 +4,11 @@ namespace ChatWriter;
 public static class ChatWriter
 {
     public static List<string> MutedUsers = new List<string>();
-    public static string MainFolderPath = @"C:\Chat\Sessions\";
-    public static string RootFolderPath = @"C:\Chat\";
+    public static string RootFolderPath = @"C:\Chat\";  //Network address
+    public static string MainFolderPath = RootFolderPath + @"Sessions\";
+    public static string LocalOptionsPath = @"C:\Private\Chat\";  //Private address
+    public static string? SessionId;
+    public static List<List<string>> OptionsData = new List<List<string>>();
 
     static void ClearMessageZone(string m)
     {
@@ -46,6 +49,7 @@ public static class ChatWriter
 
     static void SendCommand(string[] command)
     {
+        OptionsData.Clear();
         switch (command[0])
         {
             case "mute":
@@ -73,6 +77,156 @@ public static class ChatWriter
                 
                 break;
         }
+        MutedUsers.Insert(0, "Mute");
+        OptionsData.Add(MutedUsers);
+        PrintOptionsData();
+        WriteOptionsFile(OptionsData);
+        MutedUsers.Remove("Mute");
+    }
+
+    static void PrintOptionsData()
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.SetCursorPosition(0, 8);
+        Console.Write(new String(' ', Console.BufferWidth)+"\n");
+        Console.Write(new String(' ', Console.BufferWidth)+"\n");
+        Console.Write(new String(' ', Console.BufferWidth)+"\n");
+        Console.SetCursorPosition(0, 8);
+        bool first = true;
+        foreach (List<string> list in OptionsData)
+        {
+            first = true;
+            foreach (string str in list)
+            {
+                Console.Write(str);
+                if (first)
+                {
+                    first = false;
+                    Console.Write(":");
+                }
+                Console.Write("\t");
+            }
+            Console.Write("\n");
+        }
+        Console.SetCursorPosition(0, 6);
+    }
+    static void ClearOptionsFile()
+    {
+        FileStream file = new FileStream(LocalOptionsPath + SessionId + "_opt", FileMode.Open, FileAccess.ReadWrite,
+            FileShare.Read);
+        
+        StreamReader reader = new StreamReader(file);
+        int count = 0;
+        while (true)
+        {
+            string line = reader.ReadLine()+"";
+            if (line == "")
+            {
+                break;
+            }
+
+            count++;
+        }
+        reader.Close();
+        file = new FileStream(LocalOptionsPath + SessionId + "_opt", FileMode.Open, FileAccess.ReadWrite,
+            FileShare.Write);
+        StreamWriter writer = new StreamWriter(file);
+        writer.Write(new String(' ', 6400));
+        writer.Close();
+    }
+    static void WriteOptionsFile(List<List<string>> data)
+    {
+        FileStream file;
+        StreamWriter writer;
+        ClearOptionsFile();
+        file = new FileStream(LocalOptionsPath + SessionId + "_opt", FileMode.Open, FileAccess.ReadWrite,
+            FileShare.ReadWrite);
+        writer = new StreamWriter(file);
+        
+        for(int j = 0; j < data.Count();j++){
+            for (int i = 0; i < data[j].Count(); i++)
+            {
+                if (i==0)
+                {
+                    writer.WriteLine("-" + data[j][0]);
+                }
+                else
+                {
+                    writer.WriteLine("--" + data[j][i]);
+                }
+            }
+        }
+        writer.Close();
+    }
+    static void LoadOptionsFile()
+    {
+        FileStream file = new FileStream(LocalOptionsPath + SessionId + "_opt", FileMode.Open, FileAccess.ReadWrite,
+            FileShare.Read);
+        StreamReader reader = new StreamReader(file);
+        List<string> lines = new List<string>();
+        List<List<string>> data = new List<List<string>>();
+        while (true)
+        {
+            string line = reader.ReadLine()+"";
+            if (line == "")
+            {
+                break;
+            }
+            lines.Add(line);
+        }
+        reader.Close();
+        for (int i = 0; i < lines.Count(); i++)
+        {
+            lines[i] = lines[i].Replace(" ", "");
+            if (lines[i] == "")
+            {
+                lines.Remove("");
+            }
+
+        }
+        List<string> list = new List<string>();
+        for (int i = 0; i < lines.Count(); i++)
+        {
+            if (lines[i][0] == '-' && lines[i][1] == '-')
+            {
+                Console.SetCursorPosition(0, 24);
+                string mod = lines[i].Remove(0, 2);
+                list.Add(mod);
+                Console.WriteLine();
+            }
+            else
+            {
+                if (list.Count() < 1)
+                {
+                    list.Add(lines[i].Remove(0, 1));
+                    if (i == lines.Count() - 1)
+                    {
+                        data.Add(new List<string>(list));
+                        list.Clear();
+                    }
+                    continue;
+                }
+                data.Add(list);
+                list.Clear();
+                
+            }
+
+            if (i == lines.Count() - 1)
+            {
+                data.Add(new List<string>(list));
+                list.Clear();
+            }
+        }
+        OptionsData = new List<List<string>>(data);
+        data.Clear();
+        foreach (List<String> list_ in OptionsData)
+        {
+            if (list_[0] == "Mute")
+            {
+                MutedUsers = new List<string>(list_);
+                MutedUsers.Remove("Mute");
+            }
+        }
     }
     static bool Filter(string message)
     {
@@ -91,10 +245,15 @@ public static class ChatWriter
         writer.WriteLine("0");
         writer.Close();
     }
-    public static void Main(string[] args)
-    {
-        Random rn = new Random();
 
+    static void CreateLocalOptionsFile(string p)
+    {
+        FileStream file = File.Create(p);
+        file.Close();
+    }
+
+    static void CheckDirectories()
+    {
         if (!Directory.Exists(RootFolderPath))
         {
             DirectoryInfo di = Directory.CreateDirectory(RootFolderPath);
@@ -105,20 +264,46 @@ public static class ChatWriter
         {
             Directory.CreateDirectory(MainFolderPath);
         }
+        if (!Directory.Exists(LocalOptionsPath))
+        {
+            Directory.CreateDirectory(LocalOptionsPath);
+        }
+    }
+    public static void Main(string[] args)
+    {
+        Random rn = new Random();
+
+        CheckDirectories();
         
         Console.WriteLine("Enter the session id:");
-        string sessionId = Console.ReadLine()+"";
-        string sessionFilePath = MainFolderPath + sessionId;
+        SessionId = Console.ReadLine()+"";
+        string sessionFilePath = MainFolderPath + SessionId;
+
+        string localOptionsFilePath = LocalOptionsPath + SessionId + "_opt";
+        
         Console.WriteLine("Enter your username:");
         string username = Console.ReadLine()+"";
         username += "(#" + rn.Next() % 1000 + 1 + ")";
         if (!File.Exists(sessionFilePath))
         {
             CreateSession(sessionFilePath);
-            Console.WriteLine("This session id didn't exist so new one was created. Your unique session id is: " + sessionId);
+            Console.WriteLine("This session id didn't exist so new one was created. Your unique session id is: " + SessionId);
         }
-        Console.WriteLine("Connected!\n");
 
+        if (!File.Exists(localOptionsFilePath))
+        {
+            CreateLocalOptionsFile(localOptionsFilePath);
+        }
+        //ClearOptionsFile();
+        
+        Console.SetCursorPosition(0, 8);
+        
+        //Console.Write(new String('O', 10000));
+        LoadOptionsFile();
+        PrintOptionsData();
+        Console.SetCursorPosition(0, 4);
+        Console.WriteLine("Connected!\n");
+        Console.SetCursorPosition(0, 6);
         while (true)
         {
             Console.ForegroundColor = ConsoleColor.White;
